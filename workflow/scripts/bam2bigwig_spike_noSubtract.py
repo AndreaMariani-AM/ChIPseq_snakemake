@@ -53,7 +53,7 @@ ref_spike = pysam.AlignmentFile(ref_spike, "rb")
 Nm    = dm.mapped
 gamma = float(ref_spike.mapped)/float(ref_input.mapped)
 alfa = str(gamma/Nm*1000000)
-print alfa
+print('The scaling factor is: ' + str(alfa))
 
 #############################
 ## Bash commands to launch ##
