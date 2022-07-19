@@ -53,7 +53,17 @@ ref_spike = pysam.AlignmentFile(ref_spike, "rb")
 Nm    = dm.mapped
 gamma = float(ref_spike.mapped)/float(ref_input.mapped)
 alfa = str(gamma/Nm*1000000)
+
+
+################################################################
+## Output some values to eventually debug                     ##
+################################################################
+print('Number of reads in ChIP is: ' + str(c.mapped))
+print('Number of Spike reads in ChIP is: ' + str(dm.mapped))
+print('Number of reads in Input is: ' + str(ref_input.mapped))
+print('Number of Spike reads in Input is: ' + str(ref_spike.mapped))
 print('The scaling factor is: ' + str(alfa))
+
 
 #############################
 ## Bash commands to launch ##
