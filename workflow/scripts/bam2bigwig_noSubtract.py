@@ -40,9 +40,9 @@ c  = pysam.AlignmentFile(case, "rb")
 ################################################################
 case_norm      = str( (1.0/float(c.mapped))*1000000 )
 
-################################################################
-## Output some values to eventually debug                     ##
-################################################################
+############################################
+## Output some values to eventually debug ##
+############################################
 print('Number of reads in ChIP is: ' + str(c.mapped))
 print("The scaling factor is: "+ str(case_norm))
 
