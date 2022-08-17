@@ -14,7 +14,7 @@ Paths to raw data are located in the file `units.tsv`. The file has the followin
 
 | sample | lane | fq1 | fq2 |
 |--------|------|-----|------|
-| name_of_sample | name_of_lane_or_resequencing | path/to/forward.fastq | path/to/reverse.fastq |
+| name-of-sample | name-of-lane-or-resequencing | path/to/forward.fastq | path/to/reverse.fastq |
 
 * The first field correspond to the sample name. This field has to be the same as the sample name that is specified in the `samples.tsv` file (see below). It is recommended to NOT use underscores in the name of the samples, dashed are prefered. I still don't understand why sometimes I get errors if I use them so before fixing I strongly recommend to use dashes instead.
 
@@ -41,7 +41,7 @@ All metadata and information regarding every sample is located in `samples.tsv`.
 
 | NAME | INPUT | SPIKE | AB | USER | GENOME | RUN | IS_INPUT |
 |------|-------|-------|----|------|--------|-----|----------|
-| name_of_sample | input_to_use | If the sample contains spikein. true or false | antibody | user | versione of genome (i.e: mm10) | run of the sequencing | if the sample is an input |
+| name-of-sample | input-to-use | If the sample contains spikein. true or false | antibody | user | versione of genome (i.e: mm10) | run of the sequencing | if the sample is an input |
 
 * For every sample, the `NAME` field has to contain exactly the same name that was written in the `sample` column of the `units.tsv`.
 
