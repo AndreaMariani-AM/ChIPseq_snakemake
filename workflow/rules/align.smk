@@ -101,46 +101,6 @@ rule update_bam:
         samtools index {output} 2>> {log}
         """
 
-
-def set_reads_spike(wildcards, input):
-        n = len(input)
-        assert n == 2 or n == 3, "input->sample must have 2 (sample + input) or 3 (sample + input + spike) elements"
-        if n == 2:
-            reads = "workflow/scripts/bam2bigwig.py"
-            return reads
-        if n == 3:
-            reads = "workflow/scripts/bam2bigwig_spike.py --spike {} --chrSizes ".format(input.spike) + config["ref"]["chr_sizes"]
-            return reads
-
-
-rule bam2bigwig:
-    input: 
-        unpack(get_bam_cntrl)
-    output:  
-        "results/06bigwig/{sample}_{control}.bw"
-    params: 
-        read_exten = set_read_extension,
-        reads      = set_reads_spike,
-        params     = config["bam2bigwig"]["other"]
-    log: 
-        "results/00log/bam2bw/{sample}_{control}_bigwig.bam2bw"
-    threads: 
-        CLUSTER["bam2bigwig"]["cpu"]
-    message: 
-        "making input subtracted bigwig for sample {wildcards.sample} with input {input.reference}"
-    benchmark:
-        "results/.benchmarks/{sample}_{control}.bam2bw.benchmark.txt"
-    shell:
-        """
-        python {params.reads} \
-        --case {input.case} \
-        --reference {input.reference} \
-        --bigwig {output} \
-        --threads {threads} \
-        --otherParams {params.read_exten} {params.params} &> {log}
-        """
-
-
 def set_reads_spike2(wildcards, input):
         n = len(input)
         assert n == 1 or n == 4, "input->sample must have 1 (sample) or 4 (sample + spike + input + input_spike) elements"
@@ -219,3 +179,46 @@ rule bigwig2server:
             run      = params.run)
             )
         shell("touch {output}".format(output = output))
+
+
+
+
+
+
+# def set_reads_spike(wildcards, input):
+#         n = len(input)
+#         assert n == 2 or n == 3, "input->sample must have 2 (sample + input) or 3 (sample + input + spike) elements"
+#         if n == 2:
+#             reads = "workflow/scripts/bam2bigwig.py"
+#             return reads
+#         if n == 3:
+#             reads = "workflow/scripts/bam2bigwig_spike.py --spike {} --chrSizes ".format(input.spike) + config["ref"]["chr_sizes"]
+#             return reads
+
+
+# rule bam2bigwig:
+#     input: 
+#         unpack(get_bam_cntrl)
+#     output:  
+#         "results/06bigwig/{sample}_{control}.bw"
+#     params: 
+#         read_exten = set_read_extension,
+#         reads      = set_reads_spike,
+#         params     = config["bam2bigwig"]["other"]
+#     log: 
+#         "results/00log/bam2bw/{sample}_{control}_bigwig.bam2bw"
+#     threads: 
+#         CLUSTER["bam2bigwig"]["cpu"]
+#     message: 
+#         "making input subtracted bigwig for sample {wildcards.sample} with input {input.reference}"
+#     benchmark:
+#         "results/.benchmarks/{sample}_{control}.bam2bw.benchmark.txt"
+#     shell:
+#         """
+#         python {params.reads} \
+#         --case {input.case} \
+#         --reference {input.reference} \
+#         --bigwig {output} \
+#         --threads {threads} \
+#         --otherParams {params.read_exten} {params.params} &> {log}
+#         """
