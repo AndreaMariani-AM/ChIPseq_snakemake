@@ -78,6 +78,9 @@ localrules: cp_fastq_pe, cp_fastq_se, filter_peaks, all, all_broad, all_GC, all_
 # Define multiple outputs based on the output files desired
 #-----------------------------------------------------------------------------------------------------------------------
 rule all:
+    input:  ALL_PEAKS + ALL_PEAKANNOT + ALL_QC + ALL_BIGWIG_NOSUB
+
+rule all_BW:
     input:  ALL_PEAKS + ALL_PEAKANNOT + ALL_BIGWIG + ALL_QC + ALL_BIGWIG_NOSUB
 
 rule all_broad:
