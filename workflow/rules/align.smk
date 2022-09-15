@@ -125,7 +125,7 @@ rule bam2bigwig_noSubstract:
     threads: 
         CLUSTER["bam2bigwig"]["cpu"]
     message: 
-        "making input subtracted bigwig for sample {wildcards.sample}"
+        "making noSubtracted bigwig for sample {wildcards.sample}"
     shell:
         """
         python {params.reads} \
