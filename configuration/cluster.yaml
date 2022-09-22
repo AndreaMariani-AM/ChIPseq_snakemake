@@ -16,6 +16,10 @@ fastp_pe:
 fastp_se:
     cpu : 3
 
+mergeFastq_pe:
+    cpu : 1
+    MaxMem : 8
+
 align:
     cpu : 7
     MaxMem : 30
