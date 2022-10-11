@@ -7,7 +7,7 @@ def set_reads(wildcards, input):
             reads = config["params"]["bowtie"]["pe"] + " -1 {} -2 {}".format(*input)
             return reads
 
-
+# Switched to Bowtie2
 rule align:
     input:
         get_fq
@@ -30,7 +30,7 @@ rule align:
         "results/.benchmarks/{sample}.align.benchmark.txt"
     shell:
         """
-        bowtie -p {threads} {params.bowtie} {params.index} {params.reads} 2> {log.align} \
+        bowtie2 -p {threads} {params.bowtie} {params.index} {params.reads} 2> {log.align} \
         | samblaster --removeDups 2> {log.rm_dups} \
         | samtools view -Sb -F 4 - \
         | samtools sort -m {params.samtools_mem}G -@ {threads} -T {output.bam}.tmp -o {output.bam} - 2>> {log.align}
@@ -60,7 +60,7 @@ rule align_spike:
         "results/.benchmarks/{sample}.alignSpike.benchmark.txt"
     shell:
         """
-        bowtie -p {threads} {params.bowtie} {params.index} {params.reads} 2> {log.align} \
+        bowtie2 -p {threads} {params.bowtie} {params.index} {params.reads} 2> {log.align} \
         | samblaster --removeDups 2> {log.rm_dups} \
         | samtools view -Sb -F 4 - \
         | samtools sort -m {params.samtools_mem}G -@ {threads} -T {output.bam}.tmp -o {output.bam} - 2>> {log.align}
