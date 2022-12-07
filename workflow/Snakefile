@@ -43,7 +43,8 @@ ALL_GCBIAS       = expand("results/01qc/GCbias/{sample}_{control}_GCbias.pdf", z
 ALL_QC           = ["results/01qc/multiqc/multiqc_report.html"]
 ALL_BIGWIG_NOSUB = expand("results/06bigwig/noSubtract/{sample}_{input}.bw", zip, sample = SAMPLES.NAME, input = SAMPLES.INPUT_SPIKE)
 ALL_BW2SERVER    = expand("results/temp_file_{sample}_{input}_{control}.txt",  zip, sample = ALL_IP, input = SAMPLES.INPUT_SPIKE, control = ALL_CONTROLS)
-
+# ALL_BAM          = expand("results/02aln/{sample}.bam.tmp.clean", sample = ALL_IP)
+# ALL_BAM_SPIKE    = expand("results/02aln_dm/{sample}_spike.bam.clean",  sample = ALL_IP)
 
 #-------------------- Set variables and target files to prepare data for GEO upload -----------------------#
 ALL_IP_SE = set(units[units['fq2'].isnull()]['sample'])
@@ -85,6 +86,9 @@ rule all_BW:
 
 rule all_broad:
     input:  ALL_PEAKS + ALL_PEAKANNOT + ALL_QC + ALL_BIGWIG_NOSUB + ALL_BROAD_PEAKS
+
+# rule all_bam:
+#     input:  ALL_BAM + ALL_BAM_SPIKE
 
 rule all_GC:
     input:  ALL_GCBIAS
