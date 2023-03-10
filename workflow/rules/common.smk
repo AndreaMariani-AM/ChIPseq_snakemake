@@ -45,9 +45,9 @@ def get_fq_forward(wildcards):
     if config["trimming"]:
         if not is_single_end(wildcards.sample):
             # paired-end sample
-            return "{tmp}/fastq/trimmed{sample}.1.fastq.gz".format(**wildcards, tmp = config["tmp"])
+            return "{tmp}/fastq/trimmed/{sample}.1.fastq.gz".format(**wildcards, tmp = config["tmp"])
         # single end sample
-        return "{tmp}/fastq/trimmed{sample}.se.fastq.gz".format(tmp = config["tmp"], **wildcards)
+        return "{tmp}/fastq/trimmed/{sample}.se.fastq.gz".format(tmp = config["tmp"], **wildcards)
     else:
         # no trimming, use raw reads
         if not is_single_end(wildcards.sample):
