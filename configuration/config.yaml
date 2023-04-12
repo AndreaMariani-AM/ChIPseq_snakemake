@@ -57,17 +57,21 @@ promoter:
 ref:
   # Bowtie index for the alignment of the sample
   index: /hpcnfs/techunits/bioinformatics/refdata/Mus_musculus/UCSC/mm10/Sequence/BowtieIndex/genome
+  #index: /hpcnfs/techunits/bioinformatics/refdata/Homo_sapiens/UCSC/hg38/Sequence/BowtieIndex/genome
   # Bowtie index for the alignmed of the spike-in, if there is
   index_spike: /hpcnfs/data/DP/dm6/dm6
   # File required by computeGCbias from deeptools
   2bit: /hpcnfs/data/DP/Databases/mm10.2bit
+  #2bit: /hpcnfs/data/DP/Databases/hg38.2bit
   # Used in computeGCbias to ignore repetitive regions in the calculation
   rep_masker: /hpcnfs/data/DP/Databases/RepeatMasker_noRandom_mm10.bed
+  #rep_masker: /hpcnfs/data/DP/Databases/RepeatMasker_noRandom_hg38.bed
   # File required by bdg2bigwig from ucsc
   chr_sizes: /hpcnfs/data/DP/Databases/mm10.chrom.sizes
   # https://deeptools.readthedocs.io/en/latest/content/feature/effectiveGenomeSize.html
   # 2304947926 --> mm9
   # 2308125349 --> mm10
+  # 2701495761 --> hg38
   egenome_size: 2308125349
 
 # Bam2bigwig params
