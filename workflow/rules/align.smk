@@ -7,7 +7,6 @@ def set_reads(wildcards, input):
             reads = config["params"]["bowtie"]["pe"] + " -1 {} -2 {}".format(*input)
             return reads
 
-# Switch to Bowtie2 ??
 rule align:
     input:
         get_fq
@@ -36,6 +35,47 @@ rule align:
         | samtools sort -m {params.samtools_mem}G -@ {threads} -T {output.bam}.tmp -o {output.bam} - 2>> {log.align}
         samtools index {output.bam}
         """
+
+# def set_reads(wildcards, input):
+#         n = len(input)
+#         if n == 1:
+#             reads = "{}".format(*input)
+#             return reads
+#         else:
+#             reads = config["params"]["bowtie2"]["pe"] + " -1 {} -2 {}".format(*input)
+#             return reads
+
+
+# # this code chunk is to switch to bowtie2
+# rule align:
+#     input:
+#         get_fq
+#     output:
+#          bam   = temp("results/02aln/{sample}.bam.tmp"),
+#          index = temp("results/02aln/{sample}.bam.tmp.bai")
+#     threads:
+#         CLUSTER["align"]["cpu"]
+#     params:
+#         #index  	     = config["ref"]["index"], #create the new one!!
+#         bowtie2 	 = config["params"]["bowtie2"]["global"],
+#         samblaster   = config["params"]["samblaster"],
+#         reads  	     = set_reads,
+#         samtools_mem = config["params"]["samtools"]["memory"]
+#     message:
+#         "Aligning {input} with parameters {params.bowtie2}"
+#     log:
+#        align   = "results/00log/alignments/{sample}.log",
+#        rm_dups = "results/00log/alignments/rm_dup/{sample}.log",
+#     benchmark:
+#         "results/.benchmarks/{sample}.align.benchmark.txt"
+#     shell:
+#         """
+#         bowtie2 -p {threads} {params.bowtie2} -x {params.index} {params.reads} 2> {log.align} \
+#         | samblaster {params.samblaster} 2> {log.rm_dups} \
+#         | samtools view -Sb -F 4 - \
+#         | samtools sort -m {params.samtools_mem}G -@ {threads} -T {output.bam}.tmp -o {output.bam} - 2>> {log.align}
+#         samtools index {output.bam}
+#         """
 
 
 rule align_spike:

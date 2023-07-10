@@ -32,6 +32,10 @@ params:
   bowtie: 
     global: "--chunkmbs 1024 -m 1 --best -S --no-unal -q"
     pe: "-I 10 -X 1000"
+  bowtie2: 
+    global: "--local --chunkmbs 1024 -m 1 --best -S --no-unal -q" # theese needs to be fixed
+    pe: "-I 10 -X 1000"
+  samblaster: "--removeDups"
   samtools:
     # Memory used by every core of samtools (GB). Be careful that 
     # memory x threads is not bigger than the amount of memory assigned to align rule
