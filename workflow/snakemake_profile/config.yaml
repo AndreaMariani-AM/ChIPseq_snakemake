@@ -1,4 +1,4 @@
-jobs: 100
+jobs: 25
 cluster-config: "configuration/cluster.yaml"
 latency-wait: 120
 keep-going: true
