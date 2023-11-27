@@ -45,6 +45,7 @@ params:
     pe: "-t 1 -A -Q -L"
   macs2:
     pk_calling: "--keep-dup all -m 3 30"
+    # mm if mouse or hs if human
     gsize: mm
     pvalue: 1e-5
     pvalue_broad: 1e-5
@@ -72,6 +73,7 @@ ref:
   #rep_masker: /hpcnfs/data/DP/Databases/RepeatMasker_noRandom_hg38.bed
   # File required by bdg2bigwig from ucsc
   chr_sizes: /hpcnfs/data/DP/Databases/mm10.chrom.sizes
+  #chr_size: /hpcnfs/data/DP/Databases/hg38.chrom.sizes
   # https://deeptools.readthedocs.io/en/latest/content/feature/effectiveGenomeSize.html
   # 2304947926 --> mm9
   # 2308125349 --> mm10
