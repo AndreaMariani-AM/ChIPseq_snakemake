@@ -1,3 +1,9 @@
+import os
+
+# define tmp folder location based on the USER
+
+user_id = os.environ["USER"]
+tmp_path = config["tmp"].format(user=user_id)
 def get_fastq(wildcards):
     return units.loc[(wildcards.sample, wildcards.lane), ["fq1", "fq2"]].dropna()
 
@@ -34,8 +40,8 @@ rule mergeFastq_pe:
         fw = lambda w: expand("results/fastq/{lane.sample}-{lane.lane}.1.fastq.gz", lane=units.loc[w.sample].itertuples()),
         rv = lambda w: expand("results/fastq/{lane.sample}-{lane.lane}.2.fastq.gz", lane=units.loc[w.sample].itertuples())
     output:
-        fastq1 = temp("{tmp}/fastq/{{sample}}.1.fastq.gz".format(tmp=config["tmp"])),
-        fastq2 = temp("{tmp}/fastq/{{sample}}.2.fastq.gz".format(tmp=config["tmp"]))
+        fastq1 = temp("{tmp}/fastq/{{sample}}.1.fastq.gz".format(tmp=tmp_path)),
+        fastq2 = temp("{tmp}/fastq/{{sample}}.2.fastq.gz".format(tmp=tmp_path))
     log:
         "results/00log/fastp/{sample}.log"
     message:
