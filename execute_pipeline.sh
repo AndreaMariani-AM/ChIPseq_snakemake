@@ -18,7 +18,7 @@ snakemake -j 1 --unlock
 tmp_dir="$1"
 to_check=/hpcscratch/ieo/${USER}/${tmp_dir}
 
-if [ -d "$to_check" ]: then
+if [ -d "$to_check" ]; then
 	echo "tmp_dir already exists, using this directory: $tmp_dir"
 else
 	echo "directory doesn't exist, creating it: $tmp_dir"
