@@ -118,7 +118,7 @@ include: "rules/downsample.smk"
 onsuccess:
     shell(
     """
-    rm -r results/fastq/
+    rm -rf results/fastq/
     qselect -u `whoami` -s E | xargs qdel -Wforce # Make sure we delete jobs in E state
     """)
 
