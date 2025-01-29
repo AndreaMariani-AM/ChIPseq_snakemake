@@ -1,6 +1,6 @@
 # Usage --> ./execute_pipeline.sh  <tmp_dir> [rules] (tmp_dir is mandatory, used defined directory to store fastq files merged.
 # rules name can be nothing or a rule defined in the snakefile without wildcards in the input files)
-# jfljsalkjflskj
+
 # Check if tmp_dir argument is provided, if not print usage
 if [ "$#" -lt 1 ]; then
   echo "Usage: $0 <tmp_dir> [the_rest...]"
