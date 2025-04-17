@@ -17,8 +17,8 @@ snakemake -j 1 --unlock
 
 # get the CL supplied argument
 tmp_dir="$1"
-userIeo="$2"
-to_check=/hpcscratch/ieo/${userIeo}/${tmp_dir}
+user_ieo="$2"
+to_check=/hpcscratch/ieo/${user_ieo}/${tmp_dir}
 
 if [ -d "$to_check" ]; then
 	echo "tmp_dir already exists, using this directory: $tmp_dir"
@@ -28,4 +28,4 @@ fi
 # shfit so the rules go to the profile
 shift
 
-nohup snakemake --config tmp=/hpcscratch/ieo/${userIeo}/${tmp_dir} --profile workflow/snakemake_profile "$@" &>> results/snakemake.log&
+nohup snakemake --config tmp=/hpcscratch/ieo/${user_ieo}/${tmp_dir} --profile workflow/snakemake_profile "$@" &>> results/snakemake.log&
