@@ -28,4 +28,4 @@ fi
 # shfit so the rules go to the profile
 shift
 
-nohup snakemake --config tmp=/hpcscratch/ieo/${USER}/${tmp_dir} --profile workflow/snakemake_profile "$@" &>> results/snakemake.log&
+nohup snakemake --config tmp=/hpcscratch/ieo/${userIeo}/${tmp_dir} --profile workflow/snakemake_profile "$@" &>> results/snakemake.log&
