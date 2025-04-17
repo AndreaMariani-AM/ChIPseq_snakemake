@@ -26,6 +26,6 @@ else
 	echo "directory doesn't exist, creating it: $tmp_dir"
 fi
 # shfit so the rules go to the profile
-shift
+shift 2
 
 nohup snakemake --config tmp=/hpcscratch/ieo/${user_ieo}/${tmp_dir} --profile workflow/snakemake_profile "$@" &>> results/snakemake.log&
