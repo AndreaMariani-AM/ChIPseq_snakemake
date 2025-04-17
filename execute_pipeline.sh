@@ -4,8 +4,8 @@
 # Check if tmp_dir argument is provided, if not print usage
 if [ "$#" -lt 2 ]; then
   echo "Usage: $0 <tmp_dir> <ieoID> [the_rest...]"
-  echo " 	<tmp_dir> : Please specifiy a name for the temporary directory, e.g. .snakemake_chip"
-  echo " 	<ieoID> : Please specifiy your ieoID to create the correct tmp directory, e.g. ieo5776"
+  echo "        <tmp_dir> : Please specifiy a name for the temporary directory, e.g. .snakemake_chip"
+  echo "        <ieoID> : Please specifiy your ieoID to create the correct tmp directory, e.g. ieo5776"
   exit 1
 fi
 
@@ -21,13 +21,13 @@ user_ieo="$2"
 to_check=/hpcscratch/ieo/${user_ieo}/${tmp_dir}
 
 if [ -d "$to_check" ]; then
-	echo "tmp_dir already exists, using this directory: $tmp_dir"
+        echo "tmp_dir already exists, using this directory: $tmp_dir"
 else
-	echo "directory doesn't exist, creating it: $tmp_dir"
+        echo "directory doesn't exist, creating it: $tmp_dir"
 fi
 # shfit so the rules go to the profile
 shift 2
 
 nohup snakemake --config tmp=/hpcscratch/ieo/${user_ieo}/${tmp_dir} \
---shadow-prefix /hpcscratch/ieo/$user_ieo/${tmp_dir}/.snakemake \
+--shadow-prefix /hpcscratch/ieo/${user_ieo}/${tmp_dir}/.snakemake \
 --profile workflow/snakemake_profile "$@" &>> results/snakemake.log&
