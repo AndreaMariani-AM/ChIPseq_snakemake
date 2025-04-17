@@ -27,8 +27,7 @@ else
 fi
 # shfit so the rules go to the profile
 shift 2
-shadow-prefix /hpcscratch/ieo/$user_ieo/.snakemake
 
 nohup snakemake --config tmp=/hpcscratch/ieo/${user_ieo}/${tmp_dir} \
---shadow-prefix /hpcscratch/ieo/$user_ieo/.snakemake \
+--shadow-prefix /hpcscratch/ieo/$user_ieo/${tmp_dir}/.snakemake \
 --profile workflow/snakemake_profile "$@" &>> results/snakemake.log&
